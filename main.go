@@ -76,12 +76,9 @@ func main() {
 func handleResponse(data []byte) error {
 
 	var pubsub pubSubMessage
-	log.Println(string(data))
 	if err := json.Unmarshal(data, &pubsub); err != nil {
 		return fmt.Errorf("unable to extract json from google response: %v", err)
 	}
-
-	log.Println(pubsub.CurrencyCode)
 
 	msg := newSlackMessage(
 		pubsub.BudgetDisplayName,
@@ -95,10 +92,9 @@ func handleResponse(data []byte) error {
 		return fmt.Errorf("unable to create payload: %v", err)
 	}
 
-	resp, err := http.Post(*slackURL, "application/json", bytes.NewReader(payload))
+	_, err = http.Post(*slackURL, "application/json", bytes.NewReader(payload))
 	if err != nil {
 		return fmt.Errorf("unable to post payload on slack URL: %v", err)
 	}
-	log.Println(resp)
 	return nil
 }
