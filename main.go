@@ -27,12 +27,12 @@ type slackMessage struct {
 }
 
 type pubSubMessage struct {
-	BudgetDisplayName string `json:"budgetDisplayName"`
-	CostAmount        int    `json:"costAmount"`
-	CostIntervalStart string `json:"costIntervalStart"`
-	BudgetAmount      int    `json:"budgetAmount"`
-	BudgetAmountType  string `json:"budgetAmountType"`
-	CurrencyCode      string `json:"currencyCode"`
+	BudgetDisplayName string  `json:"budgetDisplayName"`
+	CostAmount        float64 `json:"costAmount"`
+	CostIntervalStart string  `json:"costIntervalStart"`
+	BudgetAmount      float64 `json:"budgetAmount"`
+	BudgetAmountType  string  `json:"budgetAmountType"`
+	CurrencyCode      string  `json:"currencyCode"`
 }
 
 func isFlagGiven(flag *string) bool {
@@ -82,8 +82,8 @@ func handleResponse(data []byte) error {
 
 	msg := newSlackMessage(
 		pubsub.BudgetDisplayName,
-		strconv.Itoa(pubsub.CostAmount),
-		strconv.Itoa(pubsub.BudgetAmount),
+		strconv.FormatFloat(pubsub.CostAmount, 'f', -1, 64),
+		strconv.FormatFloat(pubsub.BudgetAmount, 'f', -1, 64),
 		pubsub.CurrencyCode,
 	)
 
