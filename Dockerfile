@@ -10,4 +10,5 @@ RUN GOOS=linux GOARCH=amd64 go build -o pub-slack main.go
 
 FROM alpine:3.8
 COPY --from=builder /go/src/github.com/tormath1/pub-slack/pub-slack /usr/local/bin
-RUN apk add ca-certificates --update
+RUN apk add ca-certificates --updat
+ENTRYPOINT ["pub-slack"]
