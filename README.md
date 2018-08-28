@@ -22,6 +22,13 @@ $ cd pub-slack
 $ go build -o pub-slack main.go 
 ```
 
+### Run with Docker
+
+This asciicast is failling, because I'm using a default `credentials.json` with dummy values.
+
+[![asciicast](https://asciinema.org/a/xTBGkLaQkFOYDkRgANd3kc9jl)](https://asciinema.org/a/xTBGkLaQkFOYDkRgANd3kc9jl)
+
+
 ### Parameters
 
 ```shell
@@ -30,7 +37,7 @@ Usage of ./pub-slack:
   -credentials string
     	absolute path to the Google Credentials JSON file
   -project string
-    	ID of your Google Project where the topic is created
+    	ID of your Google Project where the subscription is created
   -slackURL string
     	Incoming webhook URL for Slack
   -subscription string
