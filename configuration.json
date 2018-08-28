@@ -1,0 +1,6 @@
+{
+  "project": "toto-1234",
+  "subscription": "test-1",
+  "slackURL": "https://hooks.slack.com/services/...",
+  "credentialsPath": "/tmp/google-account.json"
+}
