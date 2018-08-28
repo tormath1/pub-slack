@@ -9,7 +9,6 @@ import (
 	"io/ioutil"
 	"log"
 	"net/http"
-	"os"
 	"strconv"
 
 	"cloud.google.com/go/pubsub"
@@ -21,6 +20,7 @@ var (
 	projectID    = flag.String("project", "", "ID of your Google Project where the subscription is created")
 	subscription = flag.String("subscription", "", "name of the subscription")
 	slackURL     = flag.String("slackURL", "", "Incoming webhook URL for Slack")
+	config       = flag.String("configuration", "", "absolute path to the JSON configuration")
 )
 
 type slackMessage struct {
@@ -66,8 +66,6 @@ func newConfiguration(projectName, subscription, slackURL, credentials string) *
 
 func parseArgs() *configuration {
 
-	flag.Parse()
-
 	if !(isFlagGiven(credentials) || isFlagGiven(projectID) || isFlagGiven(subscription) || isFlagGiven(slackURL)) {
 		log.Fatalf("unable to start pub-slack: -credentials, -project, -slackURL or -subscription is missing. --help to get informations.")
 	}
@@ -77,14 +75,14 @@ func parseArgs() *configuration {
 
 func main() {
 	var pubConfiguration *configuration
+	flag.Parse()
 
-	_, err := os.Stat("./configuration.json")
-	if err != nil {
+	if !isFlagGiven(config) {
 		pubConfiguration = parseArgs()
 	} else {
-		conf, err := ioutil.ReadFile("./configuration.json")
+		conf, err := ioutil.ReadFile(*config)
 		if err != nil {
-			log.Fatalf("unable to load configuration from ./configuration.json: %v", err)
+			log.Fatalf("unable to load configuration: %v", err)
 		}
 		if err := json.Unmarshal(conf, &pubConfiguration); err != nil {
 			log.Fatalf("unable to unmarshal configuration: %v", err)
