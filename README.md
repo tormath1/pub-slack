@@ -26,7 +26,7 @@ $ go build -o pub-slack main.go
 
 This asciicast is failling, because I'm using a default `credentials.json` with dummy values. Docker image is available [here](https://hub.docker.com/r/tormath1/pub-slack/)
 
-[![asciicast](https://asciinema.org/a/xTBGkLaQkFOYDkRgANd3kc9jl)](https://asciinema.org/a/xTBGkLaQkFOYDkRgANd3kc9jl)
+[![asciicast](https://asciinema.org/a/xTBGkLaQkFOYDkRgANd3kc9jl.png)](https://asciinema.org/a/xTBGkLaQkFOYDkRgANd3kc9jl)
 
 
 ### Parameters
